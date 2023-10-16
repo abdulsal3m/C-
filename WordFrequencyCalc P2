@@ -1,0 +1,21 @@
+#include <cstring>
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+
+using namespace std; 
+
+const int MAX = 100; 
+
+struct Tree{
+  char word[MAX]; 
+  int frequency; 
+};
+
+bool openFile(ifstream &inFile, string fileName);
+int loadData(ifstream & inFile, Tree list[]);
+void printData(Tree list[], int rows); 
+void freqData(Tree list[], int & rows);
+void deleteFunction(Tree list[], int & rows, int delIndex);
+void lowConv(Tree list[], int rows);
+void alpha(Tree list[], int rows);
