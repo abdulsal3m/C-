@@ -1,0 +1,80 @@
+#include "tree.h"
+
+int loadData(ifstream & inFile, Tree list[])
+{
+  int rows = 0; 
+  inFile.getline(list[rows].word, MAX);
+  while(!inFile.eof()){ 
+    inFile.getline(list[rows].word, MAX);
+    rows++; 
+  }
+  
+  return rows;
+}
+
+void printData(Tree list[], int rows)
+{
+  cout << left; 
+  cout << setw(20) << "Words";
+  cout << setw(20) << "Frequency" << endl;
+
+  for(int i = 0; i < rows; i++)
+    {
+      cout << left;
+      cout << setw(20) << list[i].word;
+      cout << setw(5) << list[i].frequency << endl;
+    }
+}
+
+void freqData(Tree list[], int & rows){
+  int i, j;
+  int delIndex;
+  for(i = 0; i < rows; i++){
+    for(j = 0; j < rows; j++){
+      if(strcmp(list[i].word, list[j].word) == 0){
+        list[i].frequency++; 
+        delIndex = j;
+        if(list[i].frequency > 1){
+          deleteFunction(list, rows, delIndex);
+        j--;
+        }
+      }
+    }
+  }
+}
+
+void deleteFunction(Tree list[], int & rows, int delIndex){
+  for(int i = delIndex; i < rows; i++){
+    strcpy(list[i].word, list[i+1].word);
+    list[i].frequency = list[i + 1].frequency;
+  }
+  rows--;
+}
+
+void lowConv(Tree list[], int rows){
+  for(int i = 0; i < rows; i++){
+    for(int j = 0; j < rows; j++){
+      if(isalpha(list[i].word[j])){
+        list[i].word[j] = tolower(list[i].word[j]);
+      }
+    }
+  }
+}
+
+void alpha(Tree list[], int rows){
+  int i = 0, j = 0;
+  char holder[MAX];
+  int intHolder;
+  for(i = 0; i < rows; i++){
+    for(j = 0; j < rows; j++){
+      if(strcmp(list[i].word, list[j].word) < 0){
+        strcpy(holder ,list[i].word);
+        strcpy(list[i].word, list[j].word);
+        strcpy(list[j].word, holder);
+        intHolder = list[i].frequency;
+        list[i].frequency = list[j].frequency;
+        list[j].frequency = intHolder;
+      }
+    }
+  }
+}
