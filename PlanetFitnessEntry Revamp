@@ -1,0 +1,153 @@
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include <stdio.h>
+#include <ctype.h>
+
+using namespace std;
+
+//Function prototypes
+int readInt(string prompt);
+char readChar(string prompt);
+char readChoice();
+void menu();
+void readInput(char &userPlan, char userChoice, int &planLength, int &userSession);
+void calcTotal(char userPlan, int planLength, int userSession);
+
+//Main function, the homebase for all the other function
+int main(){
+  int planLength, userSession;
+  char userChoice, userPlan;
+  menu();
+
+  do{
+  userChoice = readChoice();
+  readInput(userPlan, userChoice, planLength, userSession);
+  }
+  while(userChoice == 'c');
+  cout << "\nThank you for working out with us" << endl;
+}
+
+//Menu function to display the welcome message as well as the product menu
+void menu(){
+cout << "Welcome to Equinox" << endl;
+cout << "\nOur services:" << endl;
+cout << "-Sports Club Membership - $20.00/Month" << endl;
+cout << "-Ultra Sports Club Membership - $30.00/Month" << endl;
+cout << "-Personal training session - $10.00/Session" << endl;
+cout << "\n10% OFF if 12 or more months of memberships are purchased." << endl;
+cout << "20% OFF if 5 or more training sessions are purchased." << endl;
+}
+
+//A read input function to take int values and validate it
+int readInt(string prompt){
+int num;
+cout << prompt;
+cin >> num;
+while(!cin){
+  cout << "Invalid input, please try again" << endl;
+  cout << prompt; 
+  cin.clear();
+  cin.ignore(100, '\n');
+  cin >> num;
+}
+  
+cin.ignore(100, '\n');
+return num;
+}
+
+//A read input function to take char values and validate it
+char readChar(string prompt){
+char plan;
+cout << prompt;
+cin >> plan;
+while(!cin){
+  cout << "Invalid input, please try again" << endl;
+  cout << prompt;
+  cin.clear();
+  cin.ignore(100, '\n');
+  cin >> plan;
+}
+  
+cin.ignore(100, '\n');
+return plan;
+}
+
+//A bigger read input function to take 3 of the inputs vital for calculating costs and further validate it
+void readInput(char &userPlan, char userChoice, int &planLength, int &userSession){
+cout << endl;
+
+//An if condition for userChoice is used because the program is in a do while function and the program should not be asking for input when the user has opted to quit.
+if(userChoice == 'c'){
+  userPlan = readChar("Choose a membership type(S or U): ");
+  userPlan = tolower(userPlan);
+  while(userPlan != 's' && userPlan != 'u'){
+    cout << "Invalid input, please try again" << endl;
+    userPlan = readChar("Choose a membership type(S or U): ");
+    userPlan = tolower(userPlan);
+  }
+
+  planLength = readInt("Membership duration(in months): ");
+  while(planLength <= 0){
+    cout << "Invalid input, please try again" << endl;
+    planLength = readInt("Membership duration(in months): ");
+  }
+
+  userSession = readInt("Enter the amount of Personal Training Sessions: ");
+  while(userSession < 0){
+  cout << "Invalid input, please try again" << endl;
+  userSession = readInt("Enter the amount of Personal Training   Sessions: ");
+  }
+  calcTotal(userPlan, planLength, userSession);
+}
+
+}
+
+//A calc function to calculate the costs and output the final results to the user
+void calcTotal(char userPlan, int planLength, int userSession){
+
+double planTotal, sessionTotal, total;
+
+//There are two different membership plan with so the costs are calculated differently
+if(userPlan == 'u'){
+  planTotal = 30 * planLength;
+}else if(userPlan == 's')
+  planTotal = 20 * planLength;
+
+//An if condition to check whether the used qualifies for a discount
+if(planLength >= 12){
+  planTotal = planTotal * 0.90;
+}
+
+sessionTotal = userSession * 10;
+
+//Another if condition to check whether the used qualifies for a discount
+if(userSession >= 5){
+  sessionTotal = sessionTotal * 0.80;
+}
+total = sessionTotal + planTotal;
+
+//Outputting the final results to the user
+cout << "\nMemberships costs: $" << planTotal << endl;
+  
+if(sessionTotal > 0){
+  cout << "Personal Training Session costs: $" << sessionTotal << endl;
+}
+cout << "Total: $" << total << endl;
+
+
+}
+//A char function that plays a huge role in the DO-WHILE loop found in the main function, it takes one out of 2 possible inputs from the user asking whether they want to continue or quit the program
+char readChoice(){
+  char userChoice;
+  
+  userChoice = readChar("\nC to Continue and Q to Quit: ");
+  userChoice = tolower(userChoice); 
+  while(userChoice != 'c' && userChoice != 'q'){
+    cout << "Invalid input, please try again" << endl;
+    userChoice = readChar("C to Continue and Q to Quit: ");
+    userChoice = tolower(userChoice);
+  }
+  cout << endl;
+  return userChoice;
+}
