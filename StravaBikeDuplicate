@@ -1,0 +1,116 @@
+#include <iostream>
+
+using namespace std;
+void format();
+int main() {  
+  int day1, day2, day3, day4, day5, day6, day7;
+  int sum, goal, diff;
+  sum = 0;
+
+  cout << "\nWelcome to iRide" << endl;
+  format();
+  cout << "Enter your goal for this week: ";
+  cin >> goal;
+  if(goal < 0){
+    do{
+    cout << "Invalid amount, please try again" << endl;
+    cout << "Enter your goal for this week: ";
+    cin >> goal;   
+    }while(goal < 0);
+  }
+  format();
+  cout << "Enter your total distance for Monday: ";
+  cin >> day1;
+  if(day1 < 0){
+    do{
+    cout << "Invalid amount, please try again" << endl;
+    cout << "Enter your total distance for Monday: ";
+    cin >> day1;   
+    }while(day1 < 0);
+  }
+
+  cout << "\nEnter your total distance for Tuesday: ";
+  cin >> day2;
+  if(day2 < 0){
+    do{
+    cout << "Invalid amount, please try again" << endl;
+    cout << "Enter your total distance for Tuesday: ";
+    cin >> day2;   
+    }while(day2 < 0);
+  }
+  
+  cout << "\nEnter your total distance for Wednesday: ";
+  cin >> day3;
+  if(day3 < 0){
+    do{
+    cout << "Invalid amount, please try again" << endl;
+    cout << "Enter your total distance for Wednesday: ";
+    cin >> day3;   
+    }while(day3 < 0);
+  }
+
+  cout << "\nEnter your total distance for Thursday: ";
+  cin >> day4;
+  if(day4 < 0){
+    do{
+    cout << "Invalid amount, please try again" << endl;
+    cout << "Enter your total distance for Thursday: ";
+    cin >> day4;   
+    }while(day4 < 0);
+  }
+
+  cout << "\nEnter your total distance for Friday: ";
+  cin >> day5;
+  if(day5 < 0){
+    do{
+    cout << "Invalid amount, please try again" << endl;
+    cout << "Enter your total distance for Monday: ";
+    cin >> day5;   
+    }while(day5 < 0);
+  }
+
+  cout << "\nEnter your total distance for Saturday: ";
+  cin >> day6;
+  if(day6 < 0){
+    do{
+    cout << "Invalid amount, please try again" << endl;
+    cout << "Enter your total distance for Saturday: ";
+    cin >> day6;   
+    }while(day6 < 0);
+  }
+
+  cout << "\nEnter your total distance for Sunday: ";
+  cin >> day7;
+  if(day7 < 0){
+    do{
+    cout << "Invalid amount, please try again" << endl;
+    cout << "Enter your total distance for Monday: ";
+    cin >> day7;   
+    }while(day7 < 0);
+  }
+  
+  format();
+  sum = day1 + day2 + day3 + day4 + day5 + day6 + day7;
+  cout << "You rode for a total of " << sum << " miles this week." << endl;
+  format();
+  diff = sum - goal;
+  
+  if(diff >=0 ){
+    cout << "Congratulations, you have hit your weekly goal." << endl;
+    
+    if(diff > 0){
+      cout << "\nYou went " << diff << " miles past your goal, Good job!" << endl;
+    }
+    
+  }else{
+    cout << "You missed your weekly goal by " << diff * -1 << " miles." << endl;
+    cout << "\nKeep your head up, there is always another week" << endl;
+  }
+
+  format();
+  cout << "Thank you for using iRide!" << endl;
+}
+
+void format(){
+  cout << "-----------------------------------------------" << endl;
+}
