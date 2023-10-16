@@ -1,0 +1,82 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <cctype>
+#include <cstring>
+using namespace std;
+  
+int main() {
+  string ticketType, A, H, Y;
+  double x = 2.5, y = 1.25, ticketPromo, ticketGift, ticketRem, ticketSum;
+  int ticketNum;
+  char fill = '-';
+  A = x;
+  H = y;
+  Y = y;
+  cout << "Welcome to TriMet Hot Fastpass!" << endl;
+  cout << setw(35) << left << "Ticket types";
+  cout << right << "Ride fares" << endl;
+  cout << "-------------------------------------------------------" << endl;
+  cout << setw(35) << left << "Adult(18-64)";
+  cout << right << "$2.5" << endl;
+  cout << setw(35) << left << "Honored Citizen(65+ or riders with disabilities";
+  cout << right << "$1.25" << endl;
+  cout << setw(35) << left << "Youth(7-17)";
+  cout << right << "$1.25" << endl;
+  cout << "\n Enter type of ticket:";
+  cin >> ticketType;
+  
+  if(ticketType != A){
+    cout << "Invalid ticket type" << endl;
+  }
+  if(ticketType != H){
+    cout << "Invalid ticket type" << endl;
+  }
+  if(ticketType != Y){
+    cout << "Invalid ticket type" << endl;
+  }
+  
+
+  cout << "Enter number of tickets: ";
+  cin >> ticketNum;
+
+
+  if(ticketType == A){
+    ticketSum = 2.5 * ticketNum;
+    ticketPromo = 100.00 - ticketSum;
+    if(ticketPromo == 0.00){
+      cout << "You get free rides for the rest of the month" << endl;
+    }
+    else if(ticketPromo < 0.00){
+      ticketGift = ticketPromo * (-1);
+      cout << "You get free rides for the rest of the month as well as a TriMet Gift Card of " << ticketGift << "." << endl;
+    }
+    else if(ticketPromo > 0.00){
+      ticketRem = 100.00 - ticketSum;
+      cout << "Amount due: " << ticketSum << endl;
+      cout << "$" << ticketRem << " until you ar eligible for free rides for the rest of the month" << endl; 
+    }
+    else{
+      ticketSum = 1.25 * ticketNum;
+      ticketPromo = 28.00 - ticketSum;
+      if(ticketPromo == 0.00){
+        cout << "You get free rides for the rest of the month" << endl;
+      }
+      else if(ticketPromo < 0.00){
+        ticketGift = ticketPromo * (-1);
+        cout << "You get free rides for the rest of the month as well as a TriMet Gift Card of " << ticketGift << "." << endl;
+      }
+      else if(ticketPromo > 0.00);
+        ticketRem = 28.00 - ticketSum;
+        cout << "Amount due: " << ticketSum << endl;
+        cout << "$" << ticketRem << " until you are eligible for free rides for the rest of the month" << endl;
+    }
+    cout << "Thank you for using TriMet";
+    return 0;
+  }
+
+   
+
+
+  
+}
