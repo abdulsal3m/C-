@@ -1,0 +1,19 @@
+#include "Cart.h"
+
+int main() 
+{
+  Item itemList[CAP];
+  
+  int option = 0;
+  int size = 0;
+  cout << "Welcome to my Online Shopping Program!" << endl;
+  do{
+    displayMenu();
+    option = readOption("What would you like to do: ");
+    exeOption(option, itemList, size);
+   
+  
+    }while(option != 5); 
+  
+  return 0; 
+}
