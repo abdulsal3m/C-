@@ -1,0 +1,52 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+  
+  int change;
+  int numCoins;
+
+  
+  cout << "\nPlease enter the number of coins: ";
+  cin >> change;
+  
+  if (change <= 0) 
+   cout << "No change. You're broke." << endl;
+  else {
+    numCoins = change / 100; 
+    change = change % 100;
+    if (numCoins == 1)   
+      cout << numCoins << " Dollar" << endl;
+        else if (numCoins > 1)
+          cout << numCoins << " Dollars" << endl;
+
+    numCoins = change / 25;
+    change = change % 25;
+    if (numCoins == 1)
+      cout << numCoins << " Quarter" << endl;
+        else if (numCoins > 1)
+          cout << numCoins << " Quarters" << endl;
+
+    numCoins = change / 10;
+    change = change % 10;
+    if (numCoins == 1)
+      cout << numCoins << " Dime" << endl;
+        else if (numCoins > 1)
+          cout << numCoins << " Dimes" << endl;
+    
+    numCoins = change / 5;
+    change = change % 5;
+    if (numCoins == 1)
+      cout << numCoins << " Nickel" << endl;
+        else if (numCoins > 1)
+          cout << numCoins << " Nickels" << endl;
+
+    numCoins = change / 1;
+    change = change % 1;
+    if (numCoins == 1)
+      cout << numCoins << " Penny" << endl;
+        else if (numCoins > 1)
+          cout << numCoins << " Pennies" << endl;      
+  }
+  return 0;
+}
