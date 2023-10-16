@@ -1,0 +1,121 @@
+#include <iostream>
+#include <cctype>
+#include <cmath>
+
+using namespace std;
+
+void welcome();
+
+int main(){
+
+double data, overage, total;
+char plan;
+
+total = 0.0;
+welcome();
+
+cout << "\nWhich cell phone plan are you on: ";
+cin >> plan;
+plan = tolower(plan);
+
+if((plan != 's') && (plan != 'm') && (plan != 'l') && (plan != 'u')){  
+  cout << "\nInvalid input, please try again" << endl;
+  do{
+   cout << "\nWhich cell phone plan are you on: ";
+   cin >> plan;
+   plan = tolower(plan);
+  }
+  while((plan != 's') && (plan != 'm') && (plan != 'l') && (plan != 'u'));
+}
+
+cout << "\nHow much data have you use this month: ";
+cin >> data;  
+if((data < 0) || (!cin)){
+  cout << "\nInvalid input, please try again" << endl;
+  do{
+    cout << "\nHow much data have you use this month: ";
+    cin >> data;
+  }
+  while((data < 0) || (!cin));
+}
+  
+if(plan == 's'){
+ overage = 2.0;
+}else if(plan == 'm'){
+ overage = 4.0;
+}else if(plan == 'l'){
+ overage = 8.0;
+}
+overage = overage - data;
+if(overage <= 0){
+ overage = overage * (-1);
+ overage = ceil(overage);
+ overage = overage * 15;
+}
+if(plan == 's'){
+ total = 35.0 + overage;
+ if(overage <= 0.0){
+   cout << "\nTotal charges: $35.00" << endl;
+ }else{ 
+    cout << "\nOverage charges: $" << overage << ".00"<< endl;
+    cout << "Plan charges: $35.00" << endl;
+    cout << "Total charges: $" << total << ".00" << endl;
+ }
+
+  if(total > 75.00){
+    cout << "\nYou could have saved $" << total - 75.0 << ".00 if you were on our $75.00 Unlimited plan" << endl;
+  }
+}
+
+else if(plan == 'm'){
+ total = 50.00 + overage;
+ if(overage <= 0.0){
+  cout << "\nTotal charges: $50.00" << endl;
+ }else{ 
+    cout << "\nOverage charges: $" << overage << ".00"<< endl;
+    cout << "Plan charges: $50.00" << endl;
+    cout << "Total charges: $" << total << ".00" << endl;
+ }
+
+  if(total > 75.00){
+    cout << "\nYou could have saved $" << total - 75.0 << "00. if you were on our $75.00 Unlimited plan" << endl;
+  }
+}
+
+  
+else if(plan == 'l'){
+ total = 70.00 + overage;
+ if(overage <= 0.0){
+    cout << "\nTotal charges: $70.00" << endl;
+ }else{ 
+    cout << "\nOverage charges: $" << overage << ".00"<< endl;
+    cout << "Plan charges: $70.00" << endl;
+    cout << "Total charges: $" << total << ".00" << endl;
+ }
+
+  if(total > 75.00){
+    cout << "\nYou could have saved $" << total - 75.0 << ".00 if you were on our $75.00 Unlimited plan" << endl;
+  }
+}
+
+else if(plan == 'u'){
+ total = 75.00;
+  cout << "\nPlan charges: $75.00" << endl;
+  cout << "Total charges: $75.00" << endl;
+}
+
+cout << "\nThank you for using our service!" << endl;
+return 0;
+
+}
+ 
+void welcome(){
+  cout << "Welcome to the Verizon Mobile App" << endl;
+  cout << "Total charges calculator" << endl;
+  cout <<"\nS: 2GB $35/mo*" << endl;
+  cout << "M: 4GB $50/mo*" << endl;
+  cout << "L: 8GB $70/mo*" << endl;
+  cout << "U: Unlimited $75/mo" << endl;
+  cout << "\nOverages charges are $15.00 per GB" << endl;
+}
+
