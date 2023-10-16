@@ -1,0 +1,135 @@
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+int main() {
+  const double p = M_PI, load_factor = 0.64;
+  double volJar1, volJar2, volJar3, radGumballs1, radGumballs2, radGumballs3, numGum1, numGum2, numGum3, totalGum = 0, maxNum, maxJar = 0, maxGumballs;
+  int totalEnt = 0, maxGum;
+  bool entry;
+  string resp;
+  entry = true;
+
+  cout << "\nWelcome to the Gumball Statistics App" << endl;
+  cout << "-----------------------------------------------" << endl;
+  
+  cout << "Enter radius of the gumballs: ";
+  cin >> radGumballs1;
+  cout << "Enter the volume of the jar: ";
+  cin >> volJar1;
+  cout << "-----------------------------------------------" << endl;
+  numGum1 = (load_factor * volJar1)/ (4.0/3.0 * p * pow(radGumballs1, 3));
+  cout << fixed << setprecision(0) << "The jar has an estimated " << numGum1 << " gumballs." << endl;
+  totalEnt = totalEnt + 1;
+  totalGum = totalGum + numGum1;
+  cout << "-----------------------------------------------" << endl;
+  cout << "Would you like to enter more(yes or no)?: ";
+  cin >> resp;
+  
+  while(entry){
+    
+    if(resp == "no"){
+      entry = false;
+      cout << "-----------------------------------------------" << endl;
+      cout << "Number of entries: " << totalEnt << endl;
+      cout << fixed << setprecision(0) << "Average number of gumballs: " << totalGum / totalEnt << endl;
+      if(totalEnt == 1){
+        cout << "Largest gumball size entered: " <<  (4.0/3.0 * p * pow(radGumballs1, 3)) << "cm ^ 3"  << endl;
+        cout << "Jar size that containts the largest number of gumballs: " << volJar1 << endl;
+      }else{
+        cout << "Largest gumball size entered: " << maxGumballs << "cm ^ 3" << endl;
+        cout << "Jar size that containts the largest number of gumballs: " << maxJar << endl;
+      }
+    break;
+    }else{
+    cout << "-----------------------------------------------" << endl;
+    cout << "Enter radius of the gumballs: ";
+    cin >> radGumballs2;
+    cout << "Enter the volume of the jar: ";
+    cin >> volJar2;
+    numGum2 = (load_factor * volJar2)/ (4.0/3.0 * p * pow(radGumballs2, 3));
+    cout << "-----------------------------------------------" << endl;
+    cout << fixed << setprecision(0) << "The jar has an estimated " << numGum2 << " gumballs." << endl;
+    totalEnt = totalEnt + 1;
+    totalGum = totalGum + numGum2;
+    }
+
+    if(numGum1 < numGum2){
+        maxJar = volJar2;  
+    }else if(numGum1 > numGum2){
+        maxJar = volJar1;
+    }else if(numGum1 == numGum2){
+        maxJar = volJar1;
+    }
+
+    if(radGumballs1 < radGumballs2){
+      maxGumballs = (4.0/3.0 * p * pow(radGumballs2, 3));
+    }else if(numGum1 > numGum2){
+      maxGumballs = (4.0/3.0 * p * pow(radGumballs1, 3));
+    }else if(numGum2 == numGum1){
+      maxGumballs = (4.0/3.0 * p * pow(radGumballs1, 3));
+    }
+    
+    cout << "-----------------------------------------------" << endl;
+    cout << "Would you like to enter more(yes or no)?: ";
+    cin >> resp;
+
+    if(resp == "no"){
+      entry = false;
+      cout << "-----------------------------------------------" << endl;
+      cout << "Number of entries: " << totalEnt << endl;
+      cout << fixed << setprecision(0) << "Average number of gumballs: " << totalGum / totalEnt << endl;
+      if(totalEnt == 2){
+        cout << "Largest gumball size entered: " << maxGumballs << "cm ^ 3"  << endl;
+        cout << "Jar size that containts the largest number of gumballs: " << maxJar << endl;
+      
+      }
+      break; 
+    }else{
+    cout << "-----------------------------------------------" << endl;
+    cout << "Enter radius of the gumballs: ";
+    cin >> radGumballs3;
+    cout << "Enter the volume of the jar: ";
+    cin >> volJar3;
+    numGum3 = (load_factor * volJar3)/ (4.0/3.0 * p * pow(radGumballs3, 3));
+    cout << "-----------------------------------------------" << endl;
+    cout << fixed << setprecision(0) << "The jar has an estimated " << numGum3 << " gumballs." << endl;
+    totalEnt = totalEnt + 1;
+    totalGum = totalGum + numGum3;
+    }
+
+    if(numGum2 < numGum3){
+        maxJar = volJar3;  
+    }else if(numGum2 > numGum3){  
+        maxJar = volJar2;
+    }else if(numGum2 == numGum3){
+        maxJar = volJar2;
+    }
+
+    if(radGumballs2 < radGumballs3){
+      maxGumballs = (4.0/3.0 * p * pow(radGumballs3, 3));   
+    }else if(numGum2 > numGum3){
+      maxGumballs = (4.0/3.0 * p * pow(radGumballs2, 3));
+    }else if(numGum2 == numGum3){
+      maxGumballs = (4.0/3.0 * p * pow(radGumballs2, 3));
+    }
+    
+    cout << "-----------------------------------------------" << endl;
+    cout << "Would you like to enter more(yes or no)?: ";
+    cin >> resp;
+    
+    if(resp == "no"){
+      entry = false;
+      cout << "-----------------------------------------------" << endl;
+      cout << "Number of entries: " << totalEnt << endl;
+      cout << fixed << setprecision(0) << "Average number of gumballs: " << totalGum / totalEnt << endl;
+      cout << "Largest gumball size entered: " << maxGumballs << "cm ^ 3"  << endl;
+      cout << "Jar size that containts the largest number of gumballs: " << maxJar << endl;
+      break;
+    }
+    
+  }
+  cout << "-----------------------------------------------" << endl;
+  cout << "Thank you for using the Gumball Statistics App." << endl;
+}
