@@ -1,0 +1,76 @@
+#include <iostream>
+#include <stdlib.h> 
+#include <time.h> 
+using namespace std;
+
+const int DIM = 9;
+const int MAX_NUM = 15;
+
+void welcome();
+
+int main() {
+  int table[9][9];
+  int i;
+  int j;
+  int randCoor1, randCoor2;
+  int userNum1, userNum2;
+  int count = 1;
+
+  welcome();
+  
+  for (i = 0; i < DIM; i++){
+    for (j = 0; j < DIM; j++){
+      table[i][j] = 0;
+    }
+  }
+          
+  for(i = 0; i < MAX_NUM; i++){
+    srand(time(NULL));
+    randCoor1 = rand() % 10;
+    randCoor2 = rand() % 10;
+    table[randCoor1][randCoor2] = 1;
+    
+  }
+
+  for(i = 0; i < MAX_NUM; i++){
+    cout << "\nEnter your #" << count << " guess" << endl;
+    cout << "Row: ";
+    cin >> userNum1;
+    cout << "Column: ";
+    cin >> userNum2;
+  
+    if(table[userNum1][userNum2] == 1){
+      cout << "\nBang!" << endl;
+      cout << "Better luck next time" << endl;
+      break;
+    }else{
+      count++;
+    } 
+  }
+
+  if(count == 15){
+    cout << "\nCongrats!" << endl;
+  }
+
+  cout << "\nHere is the mine field" << endl;
+  cout << endl;
+  
+  for(i = 0; i < DIM; i++){
+    for(j = 0; j < DIM; j++){
+      cout << " " << table[i][j] << " ";
+    }
+    cout << endl;
+  }
+
+  
+  
+}
+
+void welcome(){
+  cout << "\nWelcome to Minesweeper" << endl;
+  cout << "Rules:" << endl;
+  cout << "1. You will first enter your guesses and then see the mine field" << endl;
+  cout << "2. 0 = NOT a mine,  1 = Mine" << endl;
+  cout << "3. There are 15 mines and you will have 15 guesses to avoid the mines" << endl;
+  cout << "Good luck!" << endl;
+}
