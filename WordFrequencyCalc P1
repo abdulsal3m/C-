@@ -1,0 +1,29 @@
+#include "tree.h"
+bool openFile(ifstream &inFile, string fileName);
+
+int main() 
+{
+  ifstream inFile;
+  Tree list[MAX]; 
+  int rows = 0; 
+  if(!openFile(inFile,"tree.txt"))
+  {
+    cout << "Could not open file tree.txt";
+    return 0; 
+  }
+  rows = loadData(inFile, list);
+  lowConv(list, rows);
+  freqData(list, rows);
+  alpha(list, rows);
+  printData(list, rows); 
+}
+
+bool openFile(ifstream &inFile, string fileName)
+{
+  inFile.open(fileName); 
+  if(!inFile)
+  {
+    return false; 
+  }
+  return true;
+}
