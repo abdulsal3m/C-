@@ -1,0 +1,88 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+void pricing();
+
+int plan_input();
+
+int months_input();
+
+double total(int choice, int months);
+
+void display_total(double charges);
+
+int main(){  
+  
+  int choice = 0, months = 0;
+  double charges;
+  charges = 0.0;
+  
+  
+  do {
+    pricing();
+    choice = plan_input();
+    if (choice != 4) {
+      months = months_input();
+      charges = total(choice, months);
+      display_total(charges);
+      }
+  } while (choice != 4);
+
+  return 0;
+}
+
+
+void pricing(){
+  cout << "Welcome to the health and wellness center" << endl;
+  cout << "-----------------------------------------------------" << endl;
+  cout << "Our current plans" << endl;
+  cout << "\n1. Standard Adult Membership - $40.00" << endl;
+  cout << "2. Child membership - $20.00" << endl;
+  cout << "3. Senior Citizen Membership - $30.00" << endl;
+  cout << "4. Quit" << endl;
+}
+
+int plan_input(){
+  int choice = 0;
+  cout << "\nPlease choose one(1-4): ";
+  cin >> choice;
+  while (choice < 1 || choice > 4 ) {
+    cout << "Invalid input, please try again: ";
+    cin >> choice;
+  }
+  return choice;
+}
+
+int months_input(){
+  int months = 0;
+  cout << "-----------------------------------------------------" << endl;
+  cout << "For how many months would you like to sign up for? ";
+  cin >> months;
+  while (months < 0) {
+    cout << "Invalid input, please try again: ";
+    cin >> months;
+  }
+  return months;
+}
+
+double total(int choice, int months){
+  double charges = 0.0;
+  switch (choice) {
+  case 1:
+    charges = months * 40.00;
+    break;
+  case 2:
+    charges = months * 20.00;
+    break;
+  case 3:
+    charges = months * 30.00;
+  }
+  return charges;
+}
+void display_total(double charges){
+  cout << "-----------------------------------------------------" << endl;
+  cout << "\nTotal charges: $" << charges << endl;
+  cout << "\n-----------------------------------------------------" << endl;
+}
