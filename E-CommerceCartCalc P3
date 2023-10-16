@@ -1,0 +1,23 @@
+#include <cstring>
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+using namespace std;
+
+const int CAP = 50; 
+
+struct Item
+{
+  char name[CAP]; 
+  float cost;
+  int quantity;
+};
+
+void displayMenu();
+int readOption(string prompt);
+void exeOption(int option, Item itemList[], int &size);
+void addItem(Item itemList[], int & size); 
+void printCart(Item itemList[], int size);
+void modItem(Item itemList[], int size);
+void delItem(Item itemList[], int & size);
+void checkout(Item itemList[], int size);
