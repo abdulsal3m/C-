@@ -1,0 +1,116 @@
+#include <fstream>
+#include <iostream>
+#include <iomanip>
+#include <cstring>
+
+using namespace std;
+
+bool openFile(ifstream &inFile);
+
+int loadData(ifstream &inFile, char occupations[][21], int nums[][2]);
+
+void findHigh(char occupations[][21], int nums[][2], int rows, char occupation[21], double &highPercent);
+
+void findLow(char occupations[][21], int nums[][2], int rows, char occupation[21], double &lowPercent);
+
+void printData(char occupations[][21], int nums[][2], int rows, char HIoccupation[21], char LOoccupation[21], double highPercent, double lowPercent);
+
+
+int main(){
+  ifstream inFile;
+  char occupations[30][21];
+  int nums[30][2];
+  char HIoccupation[21];
+  char LOoccupation[21];
+  int rows = 0;
+  double highPercent, lowPercent;
+  
+	if(!openFile(inFile)){
+		cout << "File failed to open";
+		exit(0);
+	}
+
+  rows = loadData(inFile, occupations, nums);
+  findHigh(occupations, nums, rows, HIoccupation, highPercent);
+  findLow(occupations, nums, rows, LOoccupation, lowPercent);
+	printData(occupations, nums, rows, HIoccupation, LOoccupation, highPercent, lowPercent);
+	return 0;
+}
+
+
+
+bool openFile(ifstream &inFile){
+	inFile.open("aidata.txt");
+	if(!inFile){
+		return false;
+	}
+	return true;
+}
+
+int loadData(ifstream &inFile, char occupations[][20], int nums[][2]){
+  int i = 0, j = 0;
+  int rows = 0;
+  while(!inFile.eof()){
+		inFile.getline(occupations[i], 20, ';');
+    inFile >> nums[i][j];
+    inFile.ignore(5, ';');
+    inFile >> nums[i][j];
+    inFile.ignore(5, '\n');
+    j++;
+    if(j == 1){
+      i++;
+      j = 0;
+    }
+    rows++;
+	}
+
+  return rows;
+}
+
+void findHigh(char occupations[][20], int nums[][2], int rows, char occupation[20], double &highPercent){
+  double testNum = 0.0;
+  
+	for(int i = 0; i < rows; i++){
+		testNum = nums[i][1] / nums[i][0] * 100;
+
+    if(i == 0){
+      highPercent = testNum;
+      strcpy(occupation, occupations[i]);
+    }
+    if(highPercent > testNum){
+      highPercent = testNum;
+      strcpy(occupation, occupations[i]);
+    }
+	}
+}
+
+
+
+void findLow(char occupations[][20], int nums[][2], int rows, char occupation[], double &lowPercent){ 
+  double testNum = 0.0;
+  
+	for(int i = 0; i < rows; i++){
+		testNum = nums[i][1] / nums[i][0] * 100;
+
+    if(i == 0){
+      lowPercent = testNum;
+      strcpy(occupation, occupations[i]);
+    }
+    if(lowPercent < testNum){
+      lowPercent = testNum;
+      strcpy(occupation, occupations[i]);
+    }
+	}
+}
+
+void printData(char occupations[][20], int nums[][2], int rows, char HIoccupation[21], char LOoccupation[21], int highPercent, int lowPercent){
+  int i = 0, j = 0;
+  cout << "Occupation name'\t" << "Employed'\t" << "Automation'\t" << "Percent" << endl;
+  for(i = 0; i < rows; i++){
+    cout << fixed << showpoint << setprecision(4) << occupations[i] << '\t' << nums[i][0] << '\t' << nums[i][1] << '\t' << nums[i][1] / nums[i][0] * 100 << endl;
+  }
+
+  cout << "\nHighest/Lowest Occupations Susceptible to Automation:" << endl;
+  cout << HIoccupation << " has the highest share(" << highPercent << ")" << endl;
+  cout << LOoccupation << " has the lowest share(" << lowPercent << ")" << endl;
+}
